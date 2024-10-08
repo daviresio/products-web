@@ -2,7 +2,14 @@
 
 Este es un proyecto desarrollado en **React** que proporciona una aplicación web para listar productos con paginación infinita, con la posibilidad de filtrar los registros y abrir el detalle de cada producto.
 
-La aplicación cuenta con documentación de componentes mediante **Storybook**, internacionalización, historial de búsqueda guardado, manejo de errores y observabilidad.
+La aplicación cuenta con documentación de componentes mediante
+
+- **Documentación de componentes mediante Storybook**
+- **Internacionalización**
+- **Historial de búsqueda guardado**
+- **Actualización del enlace al hacer una búsqueda o abrir un modal**
+- **Manejo de errores**
+- **Observabilidad**
 
 ### 🛠️ Pasos para Configuración del Entorno
 
