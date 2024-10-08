@@ -73,11 +73,11 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> env.production
-          echo "SENTRY_ORG=${{ secrets.SENTRY_ORG }}" >> env.production
-          echo "SENTRY_PROJECT=${{ secrets.SENTRY_PROJECT }}" >> env.production
-          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> env.production
-          echo "VITE_PRODUCTS_API_URL=${{ secrets.PRODUCTS_API_URL }}" >> env.production
+          echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> .env.production
+          echo "SENTRY_ORG=${{ secrets.SENTRY_ORG }}" >> .env.production
+          echo "SENTRY_PROJECT=${{ secrets.SENTRY_PROJECT }}" >> .env.production
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> .env.production
+          echo "VITE_PRODUCTS_API_URL=${{ secrets.PRODUCTS_API_URL }}" >> .env.production
 
       - name: Login to Google Artifact Registry
         uses: docker/login-action@v3
