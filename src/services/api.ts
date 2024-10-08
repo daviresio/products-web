@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export interface HttpResponse<T> {
   data: T | null;
@@ -9,5 +9,7 @@ export interface HttpResponse<T> {
 const api = axios.create({
   baseURL: import.meta.env.VITE_PRODUCTS_API_URL,
 });
+
+console.log(import.meta.env.VITE_PRODUCTS_API_URL);
 
 export default api;

@@ -16,8 +16,8 @@ La aplicación cuenta con documentación de componentes mediante
 1. Cloná el repositorio:
 
    ```sh
-   git clone git@github.com:daviresio/product-list-web.git
-   cd product-list-web
+   git clone git@github.com:daviresio/products-web.git
+   cd products-web
    ```
 
 2. Configurá el entorno:
