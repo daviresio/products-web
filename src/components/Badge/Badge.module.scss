@@ -1,0 +1,21 @@
+.badge {
+  display: inline-block;
+  width: fit-content;
+  border-radius: 0.25rem;
+  padding: $spacing-xs $spacing-sm;
+}
+
+.info {
+  background-color: $info-color;
+  color: $white-color;
+}
+
+.success {
+  background-color: rgba($success-color, 0.2);
+  color: $success-color;
+}
+
+.warning {
+  background-color: $warning-color;
+  color: $white-color;
+}

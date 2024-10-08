@@ -1,0 +1,49 @@
+.cardContainer {
+  padding: $spacing-sm;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 2px 0px;
+  background-color: $white-color;
+  margin-top: $spacing-md-lg;
+  margin-bottom: $spacing-xs;
+  margin-right: $spacing-md-lg;
+
+  @include respond-to('mobile') {
+    padding: $spacing-md;
+    margin: $spacing-md-lg;
+  }
+}
+
+.rowContainer {
+  display: flex;
+  align-items: start;
+  gap: 2.2rem;
+
+  @include respond-to('mobile') {
+    flex-direction: column;
+  }
+}
+
+.imageShimmer {
+  display: block;
+  margin: 0 auto;
+  height: 15rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+
+  @include respond-to('mobile') {
+    height: 20rem !important;
+    width: 20rem !important;
+    margin-bottom: $spacing-md;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.columnContainer {
+  flex: 1;
+  min-width: 0;
+
+  @include respond-to('mobile') {
+    margin-top: $spacing-md;
+  }
+}

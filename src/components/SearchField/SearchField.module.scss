@@ -1,0 +1,112 @@
+.search-field {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  form {
+    position: relative;
+    width: 100%;
+  }
+
+  .tick {
+    height: 30px;
+    width: 1px;
+    background-color: #d3d3d3;
+    position: absolute;
+    right: 50px;
+    top: 4px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    svg {
+      display: block;
+    }
+  }
+
+  input {
+    padding: 10px 60px 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    color: rgba(0, 0, 0, 0.898);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      border: 1.5px solid rgb(51, 131, 250);
+    }
+
+    @extend .body-light;
+    font-weight: 400;
+
+    &::placeholder {
+      color: $gray-color;
+      @extend .body-light;
+    }
+  }
+
+  .list {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    background-color: $white-color;
+    border: none;
+    border-radius: 0.2rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 1000;
+
+    li {
+      width: 100%;
+      padding: $spacing-md $spacing-md-lg;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+
+      svg {
+        position: static;
+      }
+
+      span {
+        @extend .body-light;
+        font-weight: 400;
+
+        &:hover {
+          background-color: $neutral-color;
+        }
+
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.searchFieldContainer {
+  width: 100%;
+
+  @include respond-to('mobile') {
+    input {
+      width: 100%;
+      max-width: none;
+    }
+  }
+}

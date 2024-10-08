@@ -1,0 +1,14 @@
+#!/bin/bash
+# start the application in developer mode usign the given environment
+# usage: ./cmd/test
+
+# Abort script at first error
+set -e
+
+# if not have the .node_modules folder, install the dependencies
+if [ ! -d "node_modules" ]; then
+    npm install
+fi
+
+# Run test application
+npm run test

@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-lg;
+  padding-right: $spacing-lg;
+
+  @include respond-to('desktop') {
+    max-width: 1140px;
+  }
+
+  @include respond-to('desktop', min) {
+    max-width: 1320px;
+  }
+
+  @include respond-to('tablet') {
+    max-width: 960px;
+  }
+
+  @include respond-to('mobile') {
+    max-width: 720px;
+  }
+}

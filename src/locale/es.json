@@ -1,0 +1,30 @@
+{
+  "search": {
+    "placeholder": "Estoy buscando...",
+    "ariaLabel": "Buscar"
+  },
+  "product": {
+    "badges": {
+      "bestSeller": "MÁS VENDIDO",
+      "dailyOffer": "OFERTA DEL DÍA"
+    },
+    "discount": "OFF",
+    "installments": {
+      "samePrice": "Mismo precio en {{count}} cuotas de {{value}}",
+      "withInterest": "{{count}} cuotas de {{value}}"
+    },
+    "arriveToday": "Llega gratis hoy",
+    "imageAlt": "Foto del producto"
+  },
+  "common": {
+    "close": "Cerrar"
+  },
+  "error": {
+    "message": "Hubo un error al cargar los datos, verifique su conexión a internet y vuelva a intentarlo.",
+    "retry": "Intentar de nuevo"
+  },
+  "emptyResult": {
+    "message": "No se encontraron resultados",
+    "clearSearch": "Limpiar búsqueda"
+  }
+}

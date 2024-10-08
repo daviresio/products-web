@@ -1,0 +1,117 @@
+.button {
+  font-size: 1.6rem;
+  padding: $spacing-md $spacing-md-lg;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  border: 2px solid transparent;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &.flat {
+    border: none;
+  }
+
+  &.outlined {
+    background: transparent;
+  }
+
+  &.primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $text-color;
+
+    &.outlined {
+      background: transparent;
+      color: $primary-color;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba($primary-color, 0.8);
+      border-color: $primary-color;
+    }
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+    border-color: $secondary-color;
+    color: $white-color;
+
+    &.outlined {
+      background: transparent;
+      color: $secondary-color;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba($secondary-color, 0.8);
+      border-color: $secondary-color;
+    }
+  }
+
+  &.danger {
+    background-color: $danger-color;
+    border-color: $danger-color;
+    color: $white-color;
+
+    &.outlined {
+      background: transparent;
+      color: $danger-color;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba($danger-color, 0.8);
+      border-color: $danger-color;
+    }
+  }
+
+  &.success {
+    background-color: $success-color;
+    border-color: $success-color;
+    color: $white-color;
+
+    &.outlined {
+      background: transparent;
+      color: $success-color;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba($success-color, 0.8);
+      border-color: $success-color;
+    }
+  }
+
+  &.info {
+    background-color: $info-color;
+    border-color: $info-color;
+    color: $white-color;
+
+    &.outlined {
+      background: transparent;
+      color: $info-color;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba($info-color, 0.8);
+      border-color: $info-color;
+    }
+  }
+
+  &.warning {
+    background-color: $warning-color;
+    border-color: $warning-color;
+    color: $white-color;
+
+    &.outlined {
+      background: transparent;
+      color: $warning-color;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba($warning-color, 0.8);
+      border-color: $warning-color;
+    }
+  }
+}

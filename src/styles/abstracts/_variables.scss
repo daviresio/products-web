@@ -1,0 +1,37 @@
+$primary-color: #fff159;
+$secondary-color: #2d3277;
+$text-color: #333333;
+$neutral-color: #f9f9f9;
+$success-color: #00a650;
+$danger-color: #f44336;
+$gray-color: #8c8c8c;
+$light-gray-color: #d3d3d3;
+$white-color: #ffffff;
+$info-color: #2196f3;
+$warning-color: #ff7733;
+
+$spacing-xs: 0.2rem;
+$spacing-sm: 0.4rem;
+$spacing-md: 0.8rem;
+$spacing-md-lg: 1.2rem;
+$spacing-lg: 1.6rem;
+$spacing-lg-xl: 2rem;
+$spacing-xl: 2.4rem;
+$spacing-xxl: 3.2rem;
+
+$spacing-values: (
+  xs: $spacing-xs,
+  sm: $spacing-sm,
+  md: $spacing-md,
+  md-lg: $spacing-md-lg,
+  lg: $spacing-lg,
+  lg-xl: $spacing-lg-xl,
+  xl: $spacing-xl,
+  xxl: $spacing-xxl,
+);
+
+$breakpoints: (
+  'mobile': 768px,
+  'tablet': 1024px,
+  'desktop': 1200px,
+);

@@ -1,0 +1,25 @@
+@mixin respond-to($breakpoint, $usecase: max) {
+  $size: map-get($breakpoints, $breakpoint);
+
+  @if $size != null {
+    @if $usecase == min {
+      @media (min-width: $size) {
+        @content;
+      }
+    } @else if $usecase == max {
+      @media (max-width: $size) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin spacing($size) {
+  $spacing-value: map-get($spacing-values, $size);
+
+  @if $spacing-value != null {
+    padding: $spacing-value;
+  } @else {
+    @warn "O valor #{$size} não existe no mapa de espaçamentos!";
+  }
+}

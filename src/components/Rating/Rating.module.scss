@@ -1,0 +1,14 @@
+.relative {
+  position: relative;
+}
+
+.stars-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: inset(0 var(--clip-percentage, 100%) 0 0);
+}
+
+.row {
+  display: flex;
+}

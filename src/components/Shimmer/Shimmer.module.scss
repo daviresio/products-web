@@ -1,0 +1,21 @@
+.shimmer {
+  background: $neutral-color;
+  background-image: linear-gradient(
+    to right,
+    $neutral-color 0%,
+    #eaeaea 20%,
+    $neutral-color 40%,
+    $neutral-color 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

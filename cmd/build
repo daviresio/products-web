@@ -1,0 +1,18 @@
+#!/bin/bash
+# apply code style to the /src directory using prettier
+# usage: ./cmd/format
+
+# Abort script at first error
+set -e
+
+# Base dir
+BASEDIR=$(dirname "$0")
+
+# change to source directory
+cd "$BASEDIR/.."
+
+# run build
+npx nest build
+
+# change back to the directory where the script has been called
+cd -

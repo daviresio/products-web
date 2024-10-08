@@ -1,0 +1,38 @@
+$property-mappings: (
+  m: margin,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  p: padding,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+  w: width,
+  h: height,
+);
+
+@mixin spacing($property, $token, $value) {
+  $css-property: map-get($property-mappings, $property);
+  .#{$property}-#{$token} {
+    #{$css-property}: $value;
+  }
+}
+
+@each $token, $value in $spacing-values {
+  @include spacing(m, $token, $value);
+  @include spacing(mt, $token, $value);
+  @include spacing(mr, $token, $value);
+  @include spacing(mb, $token, $value);
+  @include spacing(ml, $token, $value);
+
+  @include spacing(p, $token, $value);
+  @include spacing(pt, $token, $value);
+  @include spacing(pr, $token, $value);
+  @include spacing(pb, $token, $value);
+  @include spacing(pl, $token, $value);
+
+  @include spacing(w, $token, $value);
+  @include spacing(h, $token, $value);
+}

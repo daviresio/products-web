@@ -1,0 +1,88 @@
+#!/bin/bash
+# Set up the project and developer tools for the first time
+# usage: ./cmd/setup
+
+# Abort script at first error
+set -e
+
+# vars
+NODE_VERSION="v22.9.0"
+
+# Base dir
+BASEDIR=$(dirname "$0")
+
+# change to source directory
+cd "$BASEDIR/.."
+
+# Welcome message
+echo
+echo "🌱 Setup developer dependencies."
+echo "This script will set up the project and developer tools. We recommend you to execute it only one time."
+echo
+
+# Check if the user is running macOS
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    echo "🚫 This script is only for macOS"
+    exit 1
+fi
+
+# Confirmation prompt
+read -p "Type 'yes' to continue: " -r
+echo
+if [[ $REPLY != 'yes' ]]; then
+    echo "🚫 Setup cancelled."
+    exit 1
+fi
+
+# Install Homebrew if it's not installed
+if ! command -v brew >/dev/null; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    echo "🍺 Homebrew is already installed."
+fi
+
+# Install docker if it's not installed
+if ! command -v docker >/dev/null; then
+    brew install --cask docker
+else
+    echo "🐳 Docker is already installed."
+fi
+
+# Verifica se o nvm está instalado
+if [ ! -f "$HOME/.nvm/nvm.sh" ]; then
+    echo "🌳  Instalando o NVM..."
+    brew install nvm
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+else
+    echo "🌳 NVM is already installed."
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+fi
+
+# Verifica se o Node.js está instalado
+if ! command -v node >/dev/null; then
+    echo "🌳 Node não está instalado. Instalando Node $NODE_VERSION..."
+    nvm install $NODE_VERSION
+else
+    # Verifica se a versão específica do Node.js está instalada
+    if ! nvm ls $NODE_VERSION >/dev/null; then
+        echo "🔄 Versão $NODE_VERSION do Node não está instalada. Instalando..."
+        nvm install $NODE_VERSION
+    else
+        echo "🌳 Versão $NODE_VERSION do Node já está instalada."
+    fi
+fi
+# Usa a versão especificada do Node.js
+nvm use $NODE_VERSION
+
+# Install project dependencies
+npm install
+npm run prepare
+
+echo "🍃 Environment setup complete. OPEN A NEW TERMINAL WINDOW to use the new environment."
+
+# change back to the directory where the script has been called
+cd -

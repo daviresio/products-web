@@ -1,0 +1,29 @@
+#!/bin/bash
+
+to_pascal_case() {
+  echo "$1" | awk -F'[-_]' '{
+    for (i = 1; i <= NF; i++) {
+      printf "%s", toupper(substr($i, 1, 1)) tolower(substr($i, 2))
+    }
+  }'
+}
+
+SVG_DIR="./src/assets/svgs"
+
+# Output index.ts file to imports all SVGs
+OUTPUT_FILE="./src/assets/svgs/index.ts"
+
+# Create the directory if it does not exist
+mkdir -p "$(dirname "$OUTPUT_FILE")"
+
+echo "// Auto generated, do not edit!" >"$OUTPUT_FILE"
+
+for file in "$SVG_DIR"/*.svg; do
+  # Extract the file name without the extension
+  filename=$(basename "$file" .svg)
+  import_name=$(to_pascal_case "$filename")
+  # Add the export line to the index.ts file
+  echo "export { ReactComponent as $import_name } from './$filename.svg';" >>"$OUTPUT_FILE"
+done
+
+echo "Ícones SVGs generados con sucesso!"
