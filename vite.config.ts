@@ -45,4 +45,5 @@ export default defineConfig({
     setupFiles: './setupTests.ts',
     css: true,
   },
+  assetsInclude: ['**/*.jpg'],
 });

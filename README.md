@@ -1,51 +1,69 @@
-# React + TypeScript + Vite
+## 📄 Descripción del Proyecto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto desarrollado en **React** que proporciona una aplicación web para listar productos con paginación infinita, con la posibilidad de filtrar los registros y abrir el detalle de cada producto.
 
-Currently, two official plugins are available:
+La aplicación cuenta con documentación de componentes mediante **Storybook**, internacionalización, historial de búsqueda guardado, manejo de errores y observabilidad.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🛠️ Pasos para Configuración del Entorno
 
-## Expanding the ESLint configuration
+1. Cloná el repositorio:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+   ```sh
+   git clone git@github.com:daviresio/product-list-web.git
+   cd product-list-web
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+2. Configurá el entorno:
+   Utilizá el script `setup` que se encuentra en la carpeta `cmd` para configurar el entorno local. Este script hará lo siguiente:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+   - Instalar **Homebrew**, **Node.js**, **Docker**, y otras herramientas necesarias, en caso de que no estén instaladas.
+   - Instalar las dependencias del proyecto usando `npm install`.
+   - El script está destinado solo para macOS y debe ejecutarse una sola vez.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   ```sh
+   ./cmd/setup
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+3. Variables de Entorno
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-.
-```
+   Las variables de entorno necesarias fueron enviadas por correo electrónico. Si las necesitás nuevamente, pedilas por email. Los valores necesarios son:
+
+   - `VITE_PRODUCTS_API_URL=`
+   - `VITE_SENTRY_DSN=`
+   - `SENTRY_ORG=`
+   - `SENTRY_PROJECT=`
+   - `SENTRY_AUTH_TOKEN=`
+
+4. Inicializá la aplicación usando **Docker** Compose:
+
+   ```sh
+   docker compose up --build
+   ```
+
+   Esto creará los contenedores necesarios para la aplicación y su backend asociado.
+
+5. La aplicación estará corriendo en el puerto `3001` (**Docker**). También podés correr la aplicación localmente usando el comando `npm start`, que la ejecutará en el puerto `3000`.
+
+### 📊 Scripts
+
+Los scripts disponibles en la carpeta `cmd` ayudan en la configuración y desarrollo del proyecto:
+
+- `build`: Construye la aplicación para producción.
+- `format`: Formatea el código fuente del proyecto.
+- `generate-svgs-file`: Genera referencia a los archivos SVG para su uso en la aplicación.
+- `setup`: Configura el entorno para el desarrollo local, instalando dependencias y preparando el entorno.
+- `start`: Inicializa la aplicación localmente.
+- `test`: Ejecuta las pruebas del proyecto.
+
+### 🚀 CI/CD
+
+El proyecto utiliza una pipeline de integración continua (CI) para garantizar la calidad del código. La pipeline automatizada ejecuta las siguientes etapas:
+
+1. **Build**: Construye la aplicación y verifica posibles errores.
+2. **Deploy**: Utiliza **Docker** para empaquetar la aplicación y realizar el despliegue.
+
+La pipeline realiza un cálculo automático del versionado SemVer. Para esto, la rama debe apuntar a `main` y comenzar con `major/`, `feature/` o `bugfix/`. Después del merge, se calcula el SemVer, se genera la imagen y se envía al artifact de GCP, y la aplicación se despliega automáticamente en Google Cloud Run.
+
+## Contacto 📧
+
+Si tenés dudas o sugerencias, ponete en contacto al email: [daviresio@gmail.com](mailto:daviresio@gmail.com).
