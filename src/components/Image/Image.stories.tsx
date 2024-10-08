@@ -1,4 +1,3 @@
-import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import Image from './Image';
 import Shimmer from '../Shimmer/Shimmer';

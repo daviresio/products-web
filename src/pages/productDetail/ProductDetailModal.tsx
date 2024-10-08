@@ -187,8 +187,7 @@ const ProductDetailModal: React.FC = () => {
                     </Text>
                     <Spacing w="md" />
                     <Text variant={'label'} color="success">
-                      {product.discount}% {t('product.discount')} // Exemplo:
-                      20% de descuento
+                      {product.discount}% {t('product.discount')}
                     </Text>
                   </Row>
                 </>
