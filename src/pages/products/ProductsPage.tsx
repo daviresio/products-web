@@ -34,17 +34,25 @@ const ProductsPage: React.FC = () => {
     setIsLoading(true);
     setErrorLoadingFirstPage(false);
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search') || '';
+
+    const isFirstPage = page === 1;
+
     try {
-      const response = await getProducts(page, searchTerm);
+      const response = await getProducts(
+        page,
+        isFirstPage ? searchParam : searchTerm,
+      );
       const result = response.data;
       setProducts((prevProducts) => [
-        ...(page === 1 ? [] : prevProducts),
+        ...(isFirstPage ? [] : prevProducts),
         ...(result.data || []),
       ]);
       setTotalPages(result.total_pages);
     } catch (error) {
       console.error('Error fetching products:', error);
-      if (page === 1) {
+      if (isFirstPage) {
         setErrorLoadingFirstPage(true);
       }
     } finally {

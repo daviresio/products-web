@@ -28,12 +28,10 @@ const SearchField: React.FC<SearchFieldProps> = () => {
     }
   }, []);
 
-  // Atualiza o campo de busca sempre que a URL mudar
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchParam = urlParams.get(URL_PARAMS.SEARCH);
 
-    // Se não houver searchParam, limpa o campo de busca
     setSearchTerm(searchParam || '');
   }, [location.search]);
 
