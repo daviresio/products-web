@@ -65,159 +65,135 @@ const ProductDetailModal: React.FC = () => {
     };
   }, []);
 
-  if (isLoading) {
+  const content = (product: Product) => {
+    let highlightComponent: React.ReactNode = null;
+
+    if (product.highlight_status === 'BEST_SELLER') {
+      highlightComponent = (
+        <Badge variant="warning">{t('product.badges.bestSeller')}</Badge>
+      );
+    } else if (product.highlight_status === 'DAILY_OFFER') {
+      highlightComponent = (
+        <Badge variant="info">{t('product.badges.dailyOffer')}</Badge>
+      );
+    }
+
     return (
-      <div className={styles.modalDiv}>
-        <div ref={contentRef} className={styles.modal}>
-          <div className={styles.container}>
-            <div className={styles.modalContainer}>
-              <button
-                className={styles.closeButton}
-                onClick={closeModal}
-                aria-label={t('common.close')} // Fechar em espanhol
-              >
-                <Close width={24} height={24} />
-              </button>
-              <Row alignItems="start">
-                <Shimmer
-                  width="300px"
-                  height="400px"
-                  className={styles['shimmer-placeholder']}
-                />
-                <Spacing w="lg" h="lg" />
-                <Column className={styles.productDetails}>
-                  <Shimmer width="120px" height="20px" />
-                  <Spacing h="sm" />
-                  <Shimmer width="240px" height="32px" />
-                  <Spacing h="md-lg" />
-                  <Shimmer width="160px" height="20px" />
-                  <Spacing h="sm" />
-                  <Shimmer width="120px" height="24px" />
-                  <Spacing h="sm" />
-                  <Shimmer width="180px" height="20px" />
-                </Column>
+      <Row alignItems="start">
+        <img
+          className={styles.image}
+          src={product.image_link}
+          alt={t('product.imageAlt')}
+        />
+        <Spacing w="lg" h="lg" />
+        <Column className={styles.detail}>
+          {highlightComponent && (
+            <>
+              {highlightComponent}
+              <Spacing h="sm" />
+            </>
+          )}
+          <Text variant="body-bold">{product.store_name}</Text>
+          <Spacing h="xs" />
+          <Text variant={'subtitle'}>{product.name}</Text>
+          <Spacing h="sm" />
+          <Row alignItems="center">
+            <Text variant="body-light">{product.store_name}</Text>
+            <Spacing w="sm" />
+            <Verified width={14} height={14} />
+          </Row>
+          <Spacing h="sm" />
+          <Rating
+            rating={product.review_score}
+            amountOfRatings={product.total_reviews}
+          />
+          <Spacing h="md-lg" />
+          {product.discount > 0 ? (
+            <>
+              <Text variant={'caption'} color="gray" strikethrough>
+                {currencyFormatter(product.price)}
+              </Text>
+              <Spacing h="sm" />
+              <Row alignItems="center">
+                <Text variant={'body-large'}>
+                  {currencyFormatter(product.discounted_price)}
+                </Text>
+                <Spacing w="md" />
+                <Text variant={'label'} color="success">
+                  {product.discount}% {t('product.discount')}
+                </Text>
               </Row>
-            </div>
-          </div>
-        </div>
-      </div>
+            </>
+          ) : (
+            <Text variant="body-large">{currencyFormatter(product.price)}</Text>
+          )}
+          <Spacing h="sm" />
+          <Text
+            variant="body-light"
+            color={product.has_interest ? 'text' : 'success'}
+          >{`${
+            product.has_interest
+              ? t('product.installments.withInterest', {
+                  count: product.max_installments,
+                  value: currencyFormatter(product.installment_value),
+                })
+              : t('product.installments.samePrice', {
+                  count: product.max_installments,
+                  value: currencyFormatter(product.installment_value),
+                })
+          }`}</Text>
+          {product.arrive_today && (
+            <Spacing mt="md">
+              <Badge variant="success">{t('product.arriveToday')}</Badge>
+            </Spacing>
+          )}
+        </Column>
+      </Row>
     );
-  }
+  };
 
-  if (hasError || !product) {
+  const laodingContent = () => {
     return (
-      <div className={styles['modal-container']}>
-        <div ref={contentRef} className={styles.modal}>
-          <div className={styles.container}>
-            <button
-              className={styles.close}
-              onClick={closeModal}
-              aria-label={t('common.close')} // Fechar em espanhol
-            >
-              <Close width={24} height={24} />
-            </button>
-            <ErrorLoading onRetry={handleGetProduct} />
-          </div>
-        </div>
-      </div>
+      <Row alignItems="start">
+        <Shimmer
+          width="300px"
+          height="400px"
+          className={styles['shimmer-placeholder']}
+        />
+        <Spacing w="lg" h="lg" />
+        <Column className={styles.productDetails}>
+          <Shimmer width="120px" height="20px" />
+          <Spacing h="sm" />
+          <Shimmer width="240px" height="32px" />
+          <Spacing h="md-lg" />
+          <Shimmer width="160px" height="20px" />
+          <Spacing h="sm" />
+          <Shimmer width="120px" height="24px" />
+          <Spacing h="sm" />
+          <Shimmer width="180px" height="20px" />
+        </Column>
+      </Row>
     );
-  }
-
-  let highlightComponent: React.ReactNode = null;
-
-  if (product.highlight_status === 'BEST_SELLER') {
-    highlightComponent = (
-      <Badge variant="warning">{t('product.badges.bestSeller')}</Badge>
-    );
-  } else if (product.highlight_status === 'DAILY_OFFER') {
-    highlightComponent = (
-      <Badge variant="info">{t('product.badges.dailyOffer')}</Badge>
-    );
-  }
+  };
 
   return (
     <div className={styles['modal-container']}>
       <div ref={contentRef} className={styles.modal}>
+        <button
+          className={styles.close}
+          onClick={closeModal}
+          aria-label={t('common.close')}
+        >
+          <Close width={24} height={24} />
+        </button>
         <div className={styles.container}>
-          <button
-            className={styles.close}
-            onClick={closeModal}
-            aria-label={t('common.close')} // Fechar em espanhol
-          >
-            <Close width={24} height={24} />
-          </button>
-          <Row alignItems="start">
-            <img
-              className={styles.image}
-              src={product.image_link}
-              alt={t('product.imageAlt')} // Texto alternativo da imagem
-            />
-            <Spacing w="lg" h="lg" />
-            <Column className={styles.detail}>
-              {highlightComponent && (
-                <>
-                  {highlightComponent}
-                  <Spacing h="sm" />
-                </>
-              )}
-              <Text variant="body-bold">{product.store_name}</Text>
-              <Spacing h="xs" />
-              <Text variant={'subtitle'}>{product.name}</Text>
-              <Spacing h="sm" />
-              <Row alignItems="center">
-                <Text variant="body-light">{product.store_name}</Text>
-                <Spacing w="sm" />
-                <Verified width={14} height={14} />
-              </Row>
-              <Spacing h="sm" />
-              <Rating
-                rating={product.review_score}
-                amountOfRatings={product.total_reviews}
-              />
-              <Spacing h="md-lg" />
-              {product.discount > 0 ? (
-                <>
-                  <Text variant={'caption'} color="gray" strikethrough>
-                    {currencyFormatter(product.price)}
-                  </Text>
-                  <Spacing h="sm" />
-                  <Row alignItems="center">
-                    <Text variant={'body-large'}>
-                      {currencyFormatter(product.discounted_price)}
-                    </Text>
-                    <Spacing w="md" />
-                    <Text variant={'label'} color="success">
-                      {product.discount}% {t('product.discount')}
-                    </Text>
-                  </Row>
-                </>
-              ) : (
-                <Text variant="body-large">
-                  {currencyFormatter(product.price)}
-                </Text>
-              )}
-              <Spacing h="sm" />
-              <Text
-                variant="body-light"
-                color={product.has_interest ? 'text' : 'success'}
-              >{`${
-                product.has_interest
-                  ? t('product.installments.withInterest', {
-                      count: product.max_installments,
-                      value: currencyFormatter(product.installment_value),
-                    })
-                  : t('product.installments.samePrice', {
-                      count: product.max_installments,
-                      value: currencyFormatter(product.installment_value),
-                    })
-              }`}</Text>
-              {product.arrive_today && (
-                <Spacing mt="md">
-                  <Badge variant="success">{t('product.arriveToday')}</Badge>
-                </Spacing>
-              )}
-            </Column>
-          </Row>
+          {isLoading ? (
+            laodingContent()
+          ) : hasError || !product ? (
+            <ErrorLoading onRetry={handleGetProduct} />
+          ) : (
+            content(product)
+          )}
         </div>
       </div>
     </div>

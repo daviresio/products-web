@@ -8,18 +8,20 @@ import ProductsProvider from './providers/ProductsProvider';
 function App() {
   const location = useLocation();
   const background = location.state && location.state.previousLocation;
-
+  console.log(background);
   return (
     <>
       <Routes location={background || location}>
         <Route
-          path="/productos"
+          path="/productos/*"
           element={
             <ProductsProvider>
               <ProductsPage />
             </ProductsProvider>
           }
-        />
+        >
+          <Route path=":id" element={<ProductDetailModal />} />
+        </Route>
 
         <Route path="/" element={<Navigate to="/productos" replace />} />
         <Route path="*" element={<NotFoundPage />} />
